@@ -114,10 +114,6 @@ def json_path_check(state: dict, key: str, expectation) -> bool:
         last = seq[-1]
         content = last.get("content", "") if isinstance(last, dict) else str(last)
         return str(expectation) in content
-    m = re.match(r"^(\w+)\.length$", key)
-    if m:
-        value = state.get(m.group(1))
-        return isinstance(value, list) and len(value) == expectation
     return state.get(key) == expectation
 
 

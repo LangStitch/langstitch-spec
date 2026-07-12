@@ -403,7 +403,10 @@ export const LoggingSettings = z.object({
   level: z.enum(['debug', 'info', 'warning', 'error']).default('info'),
   levels: z.record(z.string(), z.enum(['debug', 'info', 'warning', 'error'])).default({}),
   format: z.enum(['text', 'json']).default('json'),
-  /** stdout: platform-managed rotation (containers). file: in-app rotation. */
+  /**
+   * stdout: JSON/text lines to stdout only (containers; platform owns rotation).
+   * file: adds an in-app rotating file in addition to stdout.
+   */
   sink: z.enum(['stdout', 'file']).default('stdout'),
   file: z
     .object({
