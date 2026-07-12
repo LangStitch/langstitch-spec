@@ -1,0 +1,11 @@
+{
+  "description": "Partial order of node executions. Each entry lists nodes that must complete before it starts.",
+  "nodes": [
+    { "nodeId": "llm-1", "after": [] }
+  ],
+  "finalState": {
+    "query": "hello world",
+    "messages.length": 1,
+    "messages[-1].contains": "STUB: reviewed your query."
+  }
+}

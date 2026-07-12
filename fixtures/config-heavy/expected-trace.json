@@ -1,0 +1,11 @@
+{
+  "description": "Sequential pipeline; enrich trims the query before the LLM.",
+  "nodes": [
+    { "nodeId": "fn-enrich", "after": [] },
+    { "nodeId": "llm-1", "after": ["fn-enrich"] }
+  ],
+  "finalState": {
+    "query": "what is the refund policy?",
+    "messages[-1].contains": "STUB: policy answer."
+  }
+}

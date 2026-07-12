@@ -1,0 +1,80 @@
+{
+  "$id": "https://spec.langstitch.com/schemas/compile-result.schema.json",
+  "title": "compile-result",
+  "specVersion": "2.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "files": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "manifest": {
+      "type": "object",
+      "properties": {
+        "irVersion": {
+          "type": "string"
+        },
+        "compilerVersion": {
+          "type": "string"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "entrypoint": {
+          "type": "string"
+        },
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "nodeId": {
+                "type": "string"
+              },
+              "file": {
+                "type": "string"
+              },
+              "line": {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              "symbol": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "nodeId",
+              "file",
+              "line"
+            ]
+          }
+        }
+      },
+      "required": [
+        "irVersion",
+        "compilerVersion",
+        "platform",
+        "entrypoint",
+        "nodes"
+      ]
+    },
+    "warnings": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": [
+    "files",
+    "manifest"
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "$id": "https://spec.langstitch.com/schemas/run-manifest.schema.json",
+  "title": "run-manifest",
+  "specVersion": "2.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "pid": {
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
+    },
+    "host": {
+      "type": "string"
+    },
+    "port": {
+      "type": "integer",
+      "minimum": -9007199254740991,
+      "maximum": 9007199254740991
+    },
+    "eventsPath": {
+      "type": "string"
+    },
+    "startedAt": {
+      "type": "string"
+    },
+    "graph": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "pid",
+    "host",
+    "port",
+    "eventsPath",
+    "startedAt",
+    "graph"
+  ]
+}

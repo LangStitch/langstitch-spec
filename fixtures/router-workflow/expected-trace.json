@@ -1,0 +1,12 @@
+{
+  "description": "Refund-path execution: classify runs, router picks b1, only the refund LLM runs.",
+  "nodes": [
+    { "nodeId": "fn-classify", "after": [] },
+    { "nodeId": "llm-refund", "after": ["fn-classify"] }
+  ],
+  "mustNotRun": ["llm-general"],
+  "finalState": {
+    "category": "refund",
+    "messages[-1].contains": "STUB: refund approved."
+  }
+}

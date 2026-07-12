@@ -1,0 +1,7 @@
+{
+  "llm": {
+    "llm-refund": "STUB: refund approved.",
+    "llm-general": "STUB: general answer."
+  },
+  "input": { "query": "I want a refund for my order", "messages": [] }
+}

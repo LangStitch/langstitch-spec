@@ -1,0 +1,239 @@
+{
+  "$id": "https://spec.langstitch.com/schemas/run-event.schema.json",
+  "title": "run-event",
+  "specVersion": "2.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "type": "object",
+      "properties": {
+        "runId": {
+          "type": "string"
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "ts": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "const": "run_started"
+        },
+        "graph": {
+          "type": "string"
+        },
+        "input": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "runId",
+        "seq",
+        "ts",
+        "type",
+        "graph"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "runId": {
+          "type": "string"
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "ts": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "const": "node_started"
+        },
+        "nodeId": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId",
+        "seq",
+        "ts",
+        "type",
+        "nodeId"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "runId": {
+          "type": "string"
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "ts": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "const": "node_finished"
+        },
+        "nodeId": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "succeeded",
+            "failed"
+          ]
+        },
+        "durationMs": {
+          "type": "number"
+        },
+        "stateDelta": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {}
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId",
+        "seq",
+        "ts",
+        "type",
+        "nodeId",
+        "status",
+        "durationMs"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "runId": {
+          "type": "string"
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "ts": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "const": "token"
+        },
+        "nodeId": {
+          "type": "string"
+        },
+        "token": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId",
+        "seq",
+        "ts",
+        "type",
+        "nodeId",
+        "token"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "runId": {
+          "type": "string"
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "ts": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "const": "interrupt"
+        },
+        "nodeId": {
+          "type": "string"
+        },
+        "prompt": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId",
+        "seq",
+        "ts",
+        "type",
+        "nodeId"
+      ]
+    },
+    {
+      "type": "object",
+      "properties": {
+        "runId": {
+          "type": "string"
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": -9007199254740991,
+          "maximum": 9007199254740991
+        },
+        "ts": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "const": "run_finished"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "succeeded",
+            "failed",
+            "interrupted"
+          ]
+        },
+        "output": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string"
+          },
+          "additionalProperties": {}
+        },
+        "error": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "runId",
+        "seq",
+        "ts",
+        "type",
+        "status"
+      ]
+    }
+  ]
+}

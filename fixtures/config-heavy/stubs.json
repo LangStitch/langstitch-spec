@@ -1,0 +1,10 @@
+{
+  "llm": {
+    "llm-1": "STUB: policy answer."
+  },
+  "input": { "query": "  what is the refund policy?  ", "messages": [] },
+  "secrets": {
+    "CRM_API_TOKEN": "fixture-secret-crm-token-do-not-emit",
+    "LANGSTITCH_API_KEY": "fixture-secret-api-key-do-not-emit"
+  }
+}

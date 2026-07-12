@@ -1,0 +1,100 @@
+{
+  "irVersion": "2.0.0",
+  "name": "router_workflow",
+  "description": "Routing: start -> classify (function) -> router -> refund | general -> end.",
+  "projectVersion": "0.1.0",
+  "logical": {
+    "entryGraphId": "main",
+    "graphs": [
+      {
+        "id": "main",
+        "name": "Main Graph",
+        "parentId": null,
+        "stateFields": [
+          { "id": "sf1", "name": "messages", "type": "messages", "reducer": "append" },
+          { "id": "sf2", "name": "query", "type": "str" },
+          { "id": "sf3", "name": "category", "type": "str" }
+        ],
+        "nodes": [
+          { "id": "start-1", "kind": "start", "label": "Start" },
+          {
+            "id": "fn-classify",
+            "kind": "function",
+            "label": "Classify",
+            "functionName": "classify",
+            "code": "category = \"refund\" if \"refund\" in state.get(\"query\", \"\").lower() else \"general\"\nresult = category",
+            "outputKey": "category"
+          },
+          {
+            "id": "router-1",
+            "kind": "router",
+            "label": "Route by category",
+            "routerFn": "",
+            "branches": [
+              { "id": "b1", "label": "refund", "condition": "state.get(\"category\") == \"refund\"", "targetNodeId": "llm-refund" },
+              { "id": "b2", "label": "general", "condition": "True", "targetNodeId": "llm-general" }
+            ]
+          },
+          {
+            "id": "llm-refund",
+            "kind": "llm",
+            "label": "Refund Handler",
+            "model": "gpt-4o-mini",
+            "systemPrompt": "You handle refund requests.",
+            "userPrompt": "Refund request: {query}",
+            "temperature": 0,
+            "maxTokens": 512,
+            "topP": 1,
+            "outputKey": "messages",
+            "boundToolIds": [],
+            "boundAgentIds": []
+          },
+          {
+            "id": "llm-general",
+            "kind": "llm",
+            "label": "General Handler",
+            "model": "gpt-4o-mini",
+            "systemPrompt": "You answer general questions.",
+            "userPrompt": "Question: {query}",
+            "temperature": 0.3,
+            "maxTokens": 512,
+            "topP": 1,
+            "outputKey": "messages",
+            "boundToolIds": [],
+            "boundAgentIds": []
+          },
+          { "id": "end-1", "kind": "end", "label": "End" }
+        ],
+        "edges": [
+          { "id": "e1", "source": "start-1", "target": "fn-classify" },
+          { "id": "e2", "source": "fn-classify", "target": "router-1" },
+          { "id": "e3", "source": "router-1", "target": "llm-refund", "sourceHandle": "b1" },
+          { "id": "e4", "source": "router-1", "target": "llm-general", "sourceHandle": "b2" },
+          { "id": "e5", "source": "llm-refund", "target": "end-1" },
+          { "id": "e6", "source": "llm-general", "target": "end-1" }
+        ]
+      }
+    ],
+    "configuration": [],
+    "settings": {
+      "logging": { "level": "debug", "format": "json", "sink": "stdout", "captureContent": false },
+      "security": { "auth": "api_key", "apiKeyEnvVar": "LANGSTITCH_API_KEY", "corsOrigins": [] }
+    }
+  },
+  "presentation": {
+    "canvasByGraph": {
+      "main": {
+        "nodes": [
+          { "id": "start-1", "position": { "x": 40, "y": 220 } },
+          { "id": "fn-classify", "position": { "x": 220, "y": 220 } },
+          { "id": "router-1", "position": { "x": 420, "y": 220 } },
+          { "id": "llm-refund", "position": { "x": 620, "y": 120 } },
+          { "id": "llm-general", "position": { "x": 620, "y": 320 } },
+          { "id": "end-1", "position": { "x": 840, "y": 220 } }
+        ]
+      }
+    },
+    "navigationPath": ["main"]
+  },
+  "target": { "platform": "python-langstitch", "options": {} }
+}

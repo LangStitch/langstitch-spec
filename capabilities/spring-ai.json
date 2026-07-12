@@ -1,0 +1,27 @@
+{
+  "platform": "spring-ai",
+  "irVersions": ["2.0"],
+  "nodeKinds": {
+    "start": "supported",
+    "end": "supported",
+    "llm": "supported",
+    "tool": "supported",
+    "router": "supported",
+    "function": "supported",
+    "subgraph": "unsupported",
+    "agent": "unsupported",
+    "rag": "unsupported",
+    "intent_classifier": "unsupported",
+    "hitl": "unsupported",
+    "response_transformer": "supported",
+    "custom": "template-required"
+  },
+  "features": {
+    "checkpointing": "unsupported",
+    "streaming": "supported",
+    "runEvents": "supported",
+    "reverseSync": "planned",
+    "mcp": "unsupported",
+    "a2a": "unsupported"
+  }
+}

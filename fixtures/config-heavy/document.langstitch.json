@@ -1,0 +1,107 @@
+{
+  "irVersion": "2.0.0",
+  "name": "config_heavy",
+  "description": "Exercises the uniform configuration contract: typed sections, defaults, secrets, file logging with rotation.",
+  "projectVersion": "0.1.0",
+  "logical": {
+    "entryGraphId": "main",
+    "graphs": [
+      {
+        "id": "main",
+        "name": "Main Graph",
+        "parentId": null,
+        "stateFields": [
+          { "id": "sf1", "name": "messages", "type": "messages", "reducer": "append" },
+          { "id": "sf2", "name": "query", "type": "str" }
+        ],
+        "nodes": [
+          { "id": "start-1", "kind": "start", "label": "Start" },
+          {
+            "id": "fn-enrich",
+            "kind": "function",
+            "label": "Enrich",
+            "functionName": "enrich",
+            "code": "result = state.get(\"query\", \"\").strip()",
+            "outputKey": "query"
+          },
+          {
+            "id": "llm-1",
+            "kind": "llm",
+            "label": "Answer",
+            "model": "gpt-4o-mini",
+            "systemPrompt": "Answer using company policy.",
+            "userPrompt": "{query}",
+            "temperature": 0.1,
+            "maxTokens": 2048,
+            "topP": 1,
+            "outputKey": "messages",
+            "boundToolIds": [],
+            "boundAgentIds": []
+          },
+          { "id": "end-1", "kind": "end", "label": "End" }
+        ],
+        "edges": [
+          { "id": "e1", "source": "start-1", "target": "fn-enrich" },
+          { "id": "e2", "source": "fn-enrich", "target": "llm-1" },
+          { "id": "e3", "source": "llm-1", "target": "end-1" }
+        ]
+      }
+    ],
+    "configuration": [
+      {
+        "id": "cfg-crm",
+        "prefix": "crm",
+        "description": "CRM connection settings.",
+        "properties": [
+          { "name": "base_url", "type": "string", "default": "https://crm.example.com/api", "description": "CRM API base URL", "required": true },
+          { "name": "timeout_seconds", "type": "int", "default": 30, "description": "Request timeout" },
+          { "name": "retry_enabled", "type": "bool", "default": true, "description": "Retry failed calls" },
+          { "name": "api_token", "type": "secret", "envVar": "CRM_API_TOKEN", "description": "CRM bearer token", "required": true }
+        ]
+      },
+      {
+        "id": "cfg-limits",
+        "prefix": "limits",
+        "description": "Operational limits.",
+        "properties": [
+          { "name": "max_refund_amount", "type": "float", "default": 250.0, "description": "Auto-approve ceiling" },
+          { "name": "allowed_regions", "type": "list", "default": ["us", "eu"], "description": "Serviceable regions" }
+        ]
+      }
+    ],
+    "settings": {
+      "logging": {
+        "level": "info",
+        "levels": { "app.nodes": "debug" },
+        "format": "json",
+        "sink": "file",
+        "file": { "path": "logs/app.log", "maxSizeMb": 10, "maxAgeDays": 7, "maxBackups": 3 },
+        "captureContent": false
+      },
+      "security": { "auth": "api_key", "apiKeyEnvVar": "LANGSTITCH_API_KEY", "corsOrigins": ["http://localhost:5173"] },
+      "observability": {
+        "enabled": true,
+        "provider": "langsmith",
+        "projectName": "config-heavy-demo",
+        "apiKeyEnv": "LANGSMITH_API_KEY",
+        "captureContent": false,
+        "sampling": 1,
+        "langsmith": { "enabled": true, "projectName": "config-heavy-demo", "apiKeyEnv": "LANGSMITH_API_KEY", "tracingV2": true }
+      }
+    }
+  },
+  "presentation": {
+    "canvasByGraph": {
+      "main": {
+        "nodes": [
+          { "id": "start-1", "position": { "x": 40, "y": 200 } },
+          { "id": "fn-enrich", "position": { "x": 220, "y": 200 } },
+          { "id": "llm-1", "position": { "x": 440, "y": 200 } },
+          { "id": "end-1", "position": { "x": 680, "y": 200 } }
+        ]
+      }
+    },
+    "navigationPath": ["main"]
+  },
+  "target": { "platform": "python-langstitch", "options": {} }
+}

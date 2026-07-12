@@ -1,0 +1,28 @@
+{
+  "name": "@langstitch/spec",
+  "version": "2.0.0",
+  "description": "LangStitch IR specification — document schema, run-event protocol, compiler protocol, capability matrices, and conformance fixtures.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "schemas",
+    "fixtures",
+    "capabilities"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "export-schemas": "tsx scripts/export-schemas.ts",
+    "test": "vitest run"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}

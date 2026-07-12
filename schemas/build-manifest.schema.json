@@ -1,0 +1,55 @@
+{
+  "$id": "https://spec.langstitch.com/schemas/build-manifest.schema.json",
+  "title": "build-manifest",
+  "specVersion": "2.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "irVersion": {
+      "type": "string"
+    },
+    "compilerVersion": {
+      "type": "string"
+    },
+    "platform": {
+      "type": "string"
+    },
+    "entrypoint": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "nodeId": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          },
+          "line": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          },
+          "symbol": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "nodeId",
+          "file",
+          "line"
+        ]
+      }
+    }
+  },
+  "required": [
+    "irVersion",
+    "compilerVersion",
+    "platform",
+    "entrypoint",
+    "nodes"
+  ]
+}

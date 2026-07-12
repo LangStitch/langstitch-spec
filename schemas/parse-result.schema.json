@@ -1,0 +1,38 @@
+{
+  "$id": "https://spec.langstitch.com/schemas/parse-result.schema.json",
+  "title": "parse-result",
+  "specVersion": "2.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "document": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {}
+    },
+    "unsyncable": {
+      "default": [],
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "file",
+          "reason"
+        ]
+      }
+    }
+  },
+  "required": [
+    "document"
+  ]
+}

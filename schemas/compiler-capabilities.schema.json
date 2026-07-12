@@ -1,0 +1,34 @@
+{
+  "$id": "https://spec.langstitch.com/schemas/compiler-capabilities.schema.json",
+  "title": "compiler-capabilities",
+  "specVersion": "2.0.0",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "compilerVersion": {
+      "type": "string"
+    },
+    "platform": {
+      "type": "string"
+    },
+    "irVersions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supportsParse": {
+      "type": "boolean"
+    },
+    "supportsDaemon": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "compilerVersion",
+    "platform",
+    "irVersions",
+    "supportsParse",
+    "supportsDaemon"
+  ]
+}

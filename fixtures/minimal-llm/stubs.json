@@ -1,0 +1,6 @@
+{
+  "llm": {
+    "llm-1": "STUB: reviewed your query."
+  },
+  "input": { "query": "hello world", "messages": [] }
+}

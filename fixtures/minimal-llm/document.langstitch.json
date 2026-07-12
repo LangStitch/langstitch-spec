@@ -1,0 +1,60 @@
+{
+  "irVersion": "2.0.0",
+  "name": "minimal_llm",
+  "description": "Smallest useful graph: start -> llm -> end.",
+  "projectVersion": "0.1.0",
+  "logical": {
+    "entryGraphId": "main",
+    "graphs": [
+      {
+        "id": "main",
+        "name": "Main Graph",
+        "parentId": null,
+        "stateFields": [
+          { "id": "sf1", "name": "messages", "type": "messages", "reducer": "append" },
+          { "id": "sf2", "name": "query", "type": "str" }
+        ],
+        "nodes": [
+          { "id": "start-1", "kind": "start", "label": "Start" },
+          {
+            "id": "llm-1",
+            "kind": "llm",
+            "label": "Responder",
+            "model": "gpt-4o-mini",
+            "systemPrompt": "You are a helpful assistant.",
+            "userPrompt": "Input: {query}",
+            "temperature": 0.2,
+            "maxTokens": 1024,
+            "topP": 1,
+            "outputKey": "messages",
+            "boundToolIds": [],
+            "boundAgentIds": []
+          },
+          { "id": "end-1", "kind": "end", "label": "End" }
+        ],
+        "edges": [
+          { "id": "e1", "source": "start-1", "target": "llm-1" },
+          { "id": "e2", "source": "llm-1", "target": "end-1" }
+        ]
+      }
+    ],
+    "configuration": [],
+    "settings": {
+      "logging": { "level": "debug", "format": "json", "sink": "stdout", "captureContent": false },
+      "security": { "auth": "api_key", "apiKeyEnvVar": "LANGSTITCH_API_KEY", "corsOrigins": [] }
+    }
+  },
+  "presentation": {
+    "canvasByGraph": {
+      "main": {
+        "nodes": [
+          { "id": "start-1", "position": { "x": 40, "y": 200 } },
+          { "id": "llm-1", "position": { "x": 260, "y": 180 } },
+          { "id": "end-1", "position": { "x": 520, "y": 200 } }
+        ]
+      }
+    },
+    "navigationPath": ["main"]
+  },
+  "target": { "platform": "python-langstitch", "options": {} }
+}

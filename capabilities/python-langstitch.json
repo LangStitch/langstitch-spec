@@ -1,0 +1,27 @@
+{
+  "platform": "python-langstitch",
+  "irVersions": ["2.0"],
+  "nodeKinds": {
+    "start": "supported",
+    "end": "supported",
+    "llm": "supported",
+    "tool": "supported",
+    "router": "supported",
+    "function": "supported",
+    "subgraph": "supported",
+    "agent": "supported",
+    "rag": "supported",
+    "intent_classifier": "supported",
+    "hitl": "supported",
+    "response_transformer": "supported",
+    "custom": "supported"
+  },
+  "features": {
+    "checkpointing": "supported",
+    "streaming": "supported",
+    "runEvents": "supported",
+    "reverseSync": "supported",
+    "mcp": "supported",
+    "a2a": "supported"
+  }
+}
