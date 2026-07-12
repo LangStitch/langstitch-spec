@@ -44,3 +44,5 @@ npm install
 npm run export-schemas   # regenerate schemas/ after editing src/
 npm test                 # fixture validation + v1 migration corpus
 ```
+
+See [CHANGELOG.md](CHANGELOG.md) for release history.

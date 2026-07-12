@@ -557,7 +557,7 @@ export const IrDocument = z.object({
   description: z.string().optional(),
   projectVersion: z.string().default('0.1.0'),
   logical: Logical,
-  presentation: Presentation.default({}),
+  presentation: Presentation.default({ canvasByGraph: {}, navigationPath: [], ui: {} }),
   target: Target,
 })
 
