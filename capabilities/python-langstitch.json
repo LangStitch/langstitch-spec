@@ -8,13 +8,13 @@
     "tool": "supported",
     "router": "supported",
     "function": "supported",
-    "subgraph": "supported",
-    "agent": "supported",
-    "rag": "supported",
-    "intent_classifier": "supported",
-    "hitl": "supported",
+    "subgraph": "planned",
+    "agent": "planned",
+    "rag": "planned",
+    "intent_classifier": "planned",
+    "hitl": "planned",
     "response_transformer": "supported",
-    "custom": "supported"
+    "custom": "template-required"
   },
   "features": {
     "checkpointing": "supported",

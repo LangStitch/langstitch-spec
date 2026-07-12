@@ -72,7 +72,7 @@
     "settings": {
       "logging": {
         "level": "info",
-        "levels": { "app.nodes": "debug" },
+        "levels": { "langstitch.nodes": "debug" },
         "format": "json",
         "sink": "file",
         "file": { "path": "logs/app.log", "maxSizeMb": 10, "maxAgeDays": 7, "maxBackups": 3 },
