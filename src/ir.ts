@@ -300,6 +300,21 @@ export const RagPipelineConfig = z.object({
   metadataFilters: z.string().default(''),
 })
 
+export const MultimediaSourceConfig = z.object({
+  id: z.string(),
+  name: z.string(),
+  description: z.string().default(''),
+  sourcePaths: z.string().default(''),
+  allowedExtensions: z.string().default('pdf,txt,md,docx,png,jpg,jpeg,webp,gif,tiff,bmp'),
+  excludedTypes: z.string().default('video/,image/svg+xml,application/postscript'),
+  extractionMode: z.enum(['text', 'ocr', 'vision_diffusion', 'hybrid']).default('hybrid'),
+  visionModel: z.string().default('gpt-4o'),
+  ocrLanguage: z.string().default('eng'),
+  pipelineId: z.string().default(''),
+  maxPagesPerFile: z.number().int().default(50),
+  includeMetadata: z.boolean().default(true),
+})
+
 export const McpServerDefinition = z.object({
   id: z.string(),
   name: z.string(),
@@ -546,6 +561,7 @@ export const Logical = z.object({
   businessRuleRegistry: z.array(BusinessRuleDefinition).default([]),
   personaRegistry: z.array(PersonaDefinition).default([]),
   ragPipelines: z.array(RagPipelineConfig).default([]),
+  multimediaSources: z.array(MultimediaSourceConfig).default([]),
   mcpServers: z.array(McpServerDefinition).default([]),
   remoteGraphs: z.array(RemoteGraphRef).default([]),
   componentRegistry: z.array(ComponentManifestRef).default([]),
