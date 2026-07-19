@@ -21,7 +21,7 @@
     "streaming": "supported",
     "runEvents": "supported",
     "reverseSync": "planned",
-    "mcp": "unsupported",
+    "mcp": "supported",
     "a2a": "unsupported"
   }
 }
